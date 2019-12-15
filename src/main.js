@@ -1,12 +1,21 @@
 const electron = require('electron');
 const url = require('url');
 const path = require('path');
-require('dotenv').config();
+const coin = require('coin.js');
 
 const { app, BrowserWindow, Menu, ipcMain } = electron; // destructuring
 
 let mainWindow;
 let addCryptoWindow;
+
+tracked = []; // object of currencies
+module.exports.addCurrency = function(coin) { tracked.push(coin) };
+module.exports.removeCurrency = function(coin) { 
+    let index = tracked.indexOf(coin.exchange_id);
+    if (index > -1) {
+        tracked.splice(index, 1);
+    }
+}
 
 // Listen for the app to be ready
 app.on('ready', () => {
