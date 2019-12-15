@@ -16,7 +16,7 @@ module.exports.requestCoin = function(coin) {
 
 // assets vs exchanges
 
-module.exports.requestCoinNames = function() {
+module.exports.requestCoinExchanges = function() {
     return new Promise((resolve, reject) => {
         request('https://rest.coinapi.io/v1/exchanges?apikey' + process.env.COIN_API_KEY, (error, response, body) => {
             if (!error && response.statusCode == 200) {
@@ -26,6 +26,23 @@ module.exports.requestCoinNames = function() {
                         exchange_id: coin.exchange_id,
                         name: coin.name
                     });
+                }
+    
+                resolve(coins);
+            } else {
+                reject('Error occurred when attempting to request coins.')
+            }
+        });
+    });
+}
+
+module.exports.requestCoins = function() {
+    return new Promise((resolve, reject) => {
+        request('https://rest.coinapi.io/v1/assets?apikey' + process.env.COIN_API_KEY, (error, response, body) => {
+            if (!error && response.statusCode == 200) {
+                let coins = [];
+                for (let coin of body) {
+                    coins.push(coin);
                 }
     
                 resolve(coins);

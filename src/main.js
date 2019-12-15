@@ -2,7 +2,7 @@ const electron = require('electron');
 const url = require('url');
 const path = require('path');
 
-const coin = require(path.join(__dirname, 'coin.js'));
+const Coin = require(path.join(__dirname, 'coin.js'));
 
 const { app, BrowserWindow, Menu, webContents, ipcMain } = electron; // destructuring
 
