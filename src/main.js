@@ -1,12 +1,12 @@
 const electron = require('electron');
 const url = require('url');
 const path = require('path');
-const coin = require('coin.js');
 
-const { app, BrowserWindow, Menu, ipcMain } = electron; // destructuring
+const coin = require(path.join(__dirname, 'coin.js'));
+
+const { app, BrowserWindow, Menu, webContents, ipcMain } = electron; // destructuring
 
 let mainWindow;
-let addCryptoWindow;
 
 tracked = []; // object of currencies
 module.exports.addCurrency = function(coin) { tracked.push(coin) };
@@ -28,10 +28,13 @@ app.on('ready', () => {
 
     // Load HTML file into window
     mainWindow.loadURL(url.format({
-        pathname: path.join(__dirname, 'mainWindow.html'),
+        pathname: path.join(__dirname, 'index.html'),
         protocol: 'file:',
         slashes: true
     }));
+
+    // DOM
+    contents = mainWindow.webContents;
 
     // Quit app when close
     mainWindow.on('closed', () => { app.quit() });
@@ -43,34 +46,6 @@ app.on('ready', () => {
     Menu.setApplicationMenu(mainMenu);
 });
 
-// Add Cryptocurrency Window
-function createAddCrypto() {
-    addCryptoWindow = new BrowserWindow({
-        width: 300,
-        height: 200,
-        title: 'Add Cryptocurrency',
-        webPreferences: {
-            nodeIntegration: true
-        }
-    })
-
-    addCryptoWindow.loadURL(url.format({
-        pathname: path.join(__dirname, 'addCryptoWindow.html'),
-        protocol: 'file:',
-        slashes: true
-    }));
-
-    // Garbage collection handling
-    addCryptoWindow.on('close', () => { addWindow = null });
-}
-
-// Catch crypto-item:add
-ipcMain.on('crypto-item:add', (event, cryptoItem) => {
-    console.log(cryptoItem);
-    mainWindow.webContents.send('crypto-item:add', cryptoItem);
-    addCryptoWindow.close();
-});
-
 // Create menu template
 const mainMenuTemplate = [
     {
@@ -80,7 +55,7 @@ const mainMenuTemplate = [
                 label: 'Add Crypto',
                 accelerator: 'CmdOrCtrl+E',
                 click() {
-                    createAddCrypto();
+                    mainWindow.webContents.send('show-add-crypto')
                 }
             },
             {

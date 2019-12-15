@@ -14,6 +14,8 @@ module.exports.requestCoin = function(coin) {
 
 }
 
+// assets vs exchanges
+
 module.exports.requestCoinNames = function() {
     return new Promise((resolve, reject) => {
         request('https://rest.coinapi.io/v1/exchanges?apikey' + process.env.COIN_API_KEY, (error, response, body) => {

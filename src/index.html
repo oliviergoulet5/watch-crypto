@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Watch Crypto</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <link rel="stylesheet" href="https://cdn.materialdesignicons.com/4.7.95/css/materialdesignicons.min.css">
+    <!-- My Scripts -->
+    <script>
+      const path = require('path');
+      require(path.join(__dirname, 'index.js'));
+    </script>
+    <script src="coin.js"></script>
+</head>
+<body>
+    <h1>Watch Crypto</h1>
+    <div class="modal" id='add-crypto-modal'>
+      <div class="modal-background"></div>
+      <div class="modal-content">
+        <div id='search-area' class="box">
+          <!-- Content ... -->
+          <div class="search-main field has-addons">
+            <div class="control is-expanded">
+              <input class="input search-bar" type="input" placeholder="Search">
+          </div>
+          <div class="control">
+            <button class="button is-primary"><span class="mdi mdi-magnify mdi-flip-h"></button>
+            </div>
+          </div>
+          <br>
+          <div class="search-suggestions columns is-multiline">
+            <!-- Boxes go here -->
+          </div>
+        </div>
+      </div>
+    </div>
+</body>
+</html>

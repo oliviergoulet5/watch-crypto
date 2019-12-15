@@ -1,0 +1,9 @@
+Need to show Add Cryptocurrency modal but currently I don't know how to access the DOM from a server
+file. 
+
+https://www.youtube.com/watch?v=rX3axskesDw
+
+Bulma Modal:
+
+Search Box
+rows of Bulma 'Box' element in a grid. Little icons displaying rise/fall, valuation
