@@ -2,7 +2,13 @@
  Electron app which monitors crypto currencies in real time. 
  
 ## goal
- To play around with the Electron framework as well as CoinAPI
+ To play around with the Electron framework as well as CoinAPI. 
+ 
+## upcoming features
+* Cryptocurrency news
+* Cryptocurrency tracking
+* Save/load tracking
+* Clean UI
 
 ## tools used
 * Electron
