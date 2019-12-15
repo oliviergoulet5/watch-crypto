@@ -1,6 +1,7 @@
 const electron = require('electron');
 const url = require('url');
 const path = require('path');
+require('dotenv').config();
 
 const { app, BrowserWindow, Menu, ipcMain } = electron; // destructuring
 
